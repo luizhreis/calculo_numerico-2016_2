@@ -24,30 +24,24 @@ print tr * '-'
 
 h = 0.5
 N = 1000000
+p = 0.0000000000001
 p1 = ((b-a)/2)+a
 p2 = p1 + h
 y_p1 = function(p1)
 y_p2 = function(p2)
 
-X = np.linspace(a, b, N)#, retstep=True)
+X = np.linspace(a, b, N)
 Y = function(X)
 alpha = (y_p2 - y_p1)/(p2 - p1)
 secante = alpha * (X - p1) + y_p1
-delta = (alpha * (0 - p1) + y_p1) - ((function(0 + h) - function(0))/h)
-derivative = ((function(X + h) - function(X))/h) + delta
-# d = function.deriv()
-# derivative = d(X)
-
-print y_p1, y_p2
-print (function(0+h)-function(0))/h
-print function.deriv()
-print function.r
+beta = (function(p1 + p) - function(p1)) / p
+tangente = beta * (X - p1) + y_p1
 
 plt.plot(p1, y_p1, 'bo', color='red')
 plt.plot(p2, y_p2, 'bo', color='red')
 plt.plot(X, Y, 'r-', label='f(' + variable + ')', color='blue')
 plt.plot(X, secante, 'r-', label='reta secante', color='red')
-plt.plot(X, derivative, 'r-', label='reta tangente', color='green')
+plt.plot(X, tangente, 'r-', label='reta tangente', color='green')
 plt.legend(loc='best')
 plt.grid(True)
 plt.show()
