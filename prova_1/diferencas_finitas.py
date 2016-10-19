@@ -22,58 +22,31 @@ print 'Função informada:'
 print(np.poly1d(function))
 print tr * '-'
 
-h = 0.5
+# h = 0.5
+hs = [0.5, 0.2, 0.05]
 N = 1000000
 p = 0.0000000000001
 p1 = ((b-a)/2)+a
-p2 = p1 + h
 y_p1 = function(p1)
-y_p2 = function(p2)
-
 X = np.linspace(a, b, N)
 Y = function(X)
-alpha = (y_p2 - y_p1)/(p2 - p1)
-secante = alpha * (X - p1) + y_p1
 beta = (function(p1 + p) - function(p1)) / p
 tangente = beta * (X - p1) + y_p1
-
-plt.plot(p1, y_p1, 'bo', color='red')
-plt.plot(p2, y_p2, 'bo', color='red')
 plt.plot(X, Y, 'r-', label='f(' + variable + ')', color='blue')
-plt.plot(X, secante, 'r-', label='reta secante', color='red')
 plt.plot(X, tangente, 'r-', label='reta tangente', color='green')
+plt.plot(p1, y_p1, 'bo', color='red')
+colors = ['orange', 'pink', 'red']
+i = 0
+for h in hs:
+	p2 = p1 + h
+	y_p2 = function(p2)
+	alpha = (y_p2 - y_p1)/(p2 - p1)
+	secante = alpha * (X - p1) + y_p1
+	plt.plot(p2, y_p2, 'bo', color=colors[i])
+	plt.plot(X, secante, 'r-', label='reta secante, h = ' + str(h), color=colors[i])
+	i = i + 1
+
+plt.title('Aproximacao para a derivada')
 plt.legend(loc='best')
 plt.grid(True)
 plt.show()
-
-# hs = [0.5, 0.2, 0.05]
-# for h in hs:
-# 	print function(h)
-# h = 0.5
-# N = 1000000
-# X,h = np.linspace(a, b, N, retstep=True);
-# Y1 = function(X)
-# Y2 = np.tan(X)
-# f_h = (b-a)/20.
-# M = np.amax(Y1)
-# m = np.amin(Y1)
-# f_v = (M-m)/20.
-# plt.plot(X, Y1, 'r-', label='f(' + variable + ')', color='blue')
-# plt.plot(X, Y2, 'r-', label='tangente', color='green')
-# plt.plot([a,a], [0.,Y1[0]], 'k--')
-# plt.plot([b,b], [0.,Y1[-1]], 'k--')
-# plt.title('Grafico de f(' + variable + ')')
-# plt.legend(loc='best')
-# plt.xlabel(variable)
-# plt.ylabel('f(' + variable + ')')
-# y_eixo_x = 0.
-# x_eixo_y = 0.
-# A = min(0. , a)-f_h
-# B = max(0. , b)+f_h
-# Ym = min(0. , m)-f_v
-# YM = max(0. , M)+f_v
-# plt.grid(True)
-# plt.axhline(y=y_eixo_x, xmin=A, xmax=B, c='k')
-# plt.axvline(x=x_eixo_y, ymin=Ym, ymax=YM, c='k')
-# plt.axis([A, B, Ym, YM])
-# plt.show()
