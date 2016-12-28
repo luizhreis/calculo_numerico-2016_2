@@ -10,21 +10,25 @@ import scipy.interpolate as spi
 
 print 'É necessário um domínio D = [a, b] × [c, d]'
 print 'Informe o intervalo [a, b]:'
-a, b = np.float32(input('a, b = '))
+#a, b = np.float32(input('a, b = '))
+a = -10
+b = 10
 print 'Informe o intervalo [c, d]:'
-c, d = np.float32(input('c, d = '))
-print 'Informe a expressão f(t, y) tal que f:D -> R'
+#c, d = np.float32(input('c, d = '))
+c = -10
+d = 10
+#print 'Informe a expressão f(t, y) tal que f:D -> R'
 # fun = 
-print 'Informe os pontos (t0, u0) e (t1, v1)'
+#print 'Informe os pontos (t0, u0) e (t1, v1)'
 
 def fun(x, y):
 	return np.sin(np.sqrt(x**2+y**2))/np.sqrt(x**2+y**2+0.1);
-	# return x**2 - y**2
+	#return x**2 - y**2
 	# return x**2 + y**2
 	# return (1-(x**2+y**3))*np.exp(-(x**2+y**2)/2)
 
 n = 500
-nc = 100
+nc = 10
 qniveis=0.2
 
 fig = plt.figure(figsize=(16, 12))
@@ -40,11 +44,14 @@ zmin = np.amin(Z)
 zmax = np.amax(Z)
 zsv  = np.array([fun(x,y) for x,y in zip(np.ravel(XV), np.ravel(YV))])
 ZV = zsv.reshape(XV.shape)
-U = ZV#(x*np.cos(np.sqrt(x**2+y**2))/np.sqrt(x**2+y**2)*np.sqrt(x**2+y**2+0.1))-(x*np.sin(np.sqrt(x**2+y**2))/((x**2+y**2+0.1)**(3/2)))
-V = ZV#(y*np.cos(np.sqrt(x**2+y**2))/np.sqrt(x**2+y**2)*np.sqrt(x**2+y**2+0.1))-(y*np.sin(np.sqrt(x**2+y**2))/((x**2+y**2+0.1)**(3/2)))
-vel = np.sqrt(U**2 + V**2)
-UN = U/vel
-VN = V/vel
+#U = XV#(XV*np.cos(np.sqrt(XV**2+YV**2))/np.sqrt(XV**2+YV**2)*np.sqrt(XV**2+YV**2+0.1))-(XV*np.sin(np.sqrt(XV**2+YV**2))/((XV**2+YV**2+0.1)**(3/2)))
+#V = YV#(YV*np.cos(np.sqrt(XV**2+YV**2))/np.sqrt(XV**2+YV**2)*np.sqrt(XV**2+YV**2+0.1))-(YV*np.sin(np.sqrt(XV**2+YV**2))/((XV**2+YV**2+0.1)**(3/2)))
+U, V = np.meshgrid(XV, YV, sparse=False)
+values = fun(U,V)
+UN, VN = np.gradient(values)
+#vel = np.sqrt(U**2 + V**2)
+#UN = U/vel
+#VN = V/vel
 
 sup1.plot_surface(X, Y, Z)
 
@@ -61,7 +68,8 @@ plt.colorbar(im) # adding the colobar on the right
 graf2.set_title('Curvas de nivel')
 
 campo = fig.add_subplot(223)
-plt.quiver(XV, YV, UN, VN, color='Teal', headlength=5)
+plt.quiver(U,V, UN, VN,color='Teal', headlength=5)
+#plt.quiver(X, Y, UN, VN, color='Teal', headlength=5)
 campo.set_title('Campo de vetores')
 
 plt.show()
