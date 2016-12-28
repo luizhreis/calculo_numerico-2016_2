@@ -28,7 +28,7 @@ def fun(x, y):
 	# return (1-(x**2+y**3))*np.exp(-(x**2+y**2)/2)
 
 n = 500
-nc = 10
+nc = 100
 qniveis=0.2
 
 fig = plt.figure(figsize=(16, 12))
