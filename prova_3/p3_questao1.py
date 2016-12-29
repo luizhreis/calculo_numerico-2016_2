@@ -10,20 +10,20 @@ import scipy.interpolate as spi
 
 print 'É necessário um domínio D = [a, b] × [c, d]'
 print 'Informe o intervalo [a, b]:'
-#a, b = np.float32(input('a, b = '))
-a = -10
-b = 10
+a, b = np.float32(input('a, b = '))
+#a = -10
+#b = 10
 print 'Informe o intervalo [c, d]:'
-#c, d = np.float32(input('c, d = '))
-c = -10
-d = 10
-#print 'Informe a expressão f(t, y) tal que f:D -> R'
-# fun = 
+c, d = np.float32(input('c, d = '))
+#c = -10
+#d = 10
+print 'Informe a expressão f(t, y) tal que f:D -> R'
+expr_f = raw_input('f(y,t) = ')
 #print 'Informe os pontos (t0, u0) e (t1, v1)'
 
-def fun(x, y):
-	return np.sin(np.sqrt(x**2+y**2))/np.sqrt(x**2+y**2+0.1);
-	#return x**2 - y**2
+def fun(t, y):
+	#return np.sin(np.sqrt(x**2+y**2))/np.sqrt(x**2+y**2+0.1);
+	return eval(expr_f)
 	# return x**2 + y**2
 	# return (1-(x**2+y**3))*np.exp(-(x**2+y**2)/2)
 
