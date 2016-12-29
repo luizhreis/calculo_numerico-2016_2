@@ -24,6 +24,8 @@ col = map(int, raw_input().split())
 print '\nEntre com os dados da matriz A'
 data = map(int, raw_input().split())
 A = coo_matrix((data, (row, col)), shape=(Np, Np)).toarray()
+print (A)
 print '\nEntre com a matriz B'
 B = map(int, raw_input().split())
 X = linalg.spsolve(A,B)
+print (X)
